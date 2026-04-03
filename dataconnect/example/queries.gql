@@ -1,0 +1,33 @@
+# Query to list all students, accessible to all users.
+query ListStudents @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  students {
+    id
+    name
+    email
+  }
+}
+
+# Mutation to create a new course, accessible only to admins.
+mutation CreateCourse($name: String!, $description: String!) @auth(expr: "auth.token.admin == true") {
+  course: courses_insert(data: {
+    name: $name,
+    description: $description
+  })
+}
+
+# Query to get courses created by the current user, accessible to signed-in users.
+query MyCourses @auth(level: USER) {
+  courses(where: {instructorUid: {eq_expr: "auth.uid"}}) {
+    id
+    name
+    description
+  }
+}
+
+# Mutation to enroll a student in a course, accessible to signed-in users.
+mutation EnrollInCourse($studentId: String!, $courseId: String!) @auth(level: USER, insecureReason: "This operation is safe to expose to all logged in users.") {
+  enrollment: enrollments_insert(data: {
+    studentId: $studentId,
+    courseId: $courseId
+  })
+}

@@ -1,0 +1,35 @@
+type User @table {
+  displayName: String!
+  email: String
+  photoUrl: String
+  createdAt: Timestamp!
+}
+
+type Course @table {
+  user: User!
+  name: String!
+  instructor: String
+  credits: Int
+  description: String
+  createdAt: Timestamp!
+}
+
+type Assignment @table {
+  user: User!
+  course: Course!
+  title: String!
+  description: String
+  dueDate: Timestamp!
+  isCompleted: Boolean!
+  reminderDate: Timestamp
+  createdAt: Timestamp!
+}
+
+type Note @table {
+  user: User!
+  course: Course!
+  title: String!
+  content: String!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+}

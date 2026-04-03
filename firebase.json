@@ -1,0 +1,16 @@
+{
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "uniunion-1c239",
+                    "appId": "1:791985764276:android:9a5571028e331c62fa24e1",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            }
+        }
+    },
+    "firestore": {
+        "rules": "firebase/firestore.rules"
+    }
+}
